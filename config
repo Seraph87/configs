@@ -1,287 +1,181 @@
-set $mod Mod4
+[bar/i3wmthemer_bar]
+width = 100%
+height = 18
+radius = 0
+fixed-center = true
 
-new_window pixel 1
-new_float normal
+background = #2f2f38
+foreground = #b0c4bb
 
-hide_edge_borders none
+line-size = 3
+line-color =
 
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
+border-size = 0
+border-color =
 
-font xft:URWGothic-Book 11
+padding-left = 0
+padding-right = 2
 
-floating_modifier $mod
+module-margin-left = 1
+module-margin-right = 2
 
-bindsym $mod+Return exec i3-sensible-terminal
+font-0 = "Source Code Pro Semibold:size=10;1"
+font-1 = "Font Awesome 5 Free:style=Solid:size=10;1"
+font-2 = "Font Awesome 5 Brands:size=10;1"
 
-# Window kill command
-bindsym $mod+Shift+q kill
+modules-left = wireless-network
+modules-center = i3
+modules-right = date battery  powermenu
 
-# start program launcher
-bindsym $mod+d exec --no-startup-id rofi -show run
+tray-position =
+;tray-padding =
+wm-restack = i3
+override-redirect = off
 
-# start brave
-bindsym $mod+b exec brave
+cursor-click = pointer
+cursor-scroll = ns-resize
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
 
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+label-mode-padding = 2
+label-mode-foreground = #34343e
+label-mode-background = #2f2f38
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+label-focused = %index%
+label-focused-background = #688486
+label-focused-foreground = #2f2f38
+label-focused-padding = 2
 
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+label-unfocused = %index%
+label-unfocused-background = #81a2be
+label-unfocused-foreground = #2f2f38
+label-unfocused-padding = 2
 
-# workspace back and forth (with/without active container)
-#workspace_auto_back_and_forth yes
-#bindsym $mod+b workspace back_and_forth
-#bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+label-visible = %index%
+label-visible-background = #81a2be
+label-visible-foreground = #2f2f38
+label-visible-padding = 2
 
-# split orientation
-bindsym $mod+h split h;exec notify-send 'tile horizontally'
-bindsym $mod+v split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+label-urgent = %index%
+label-urgent-background = #BA2922
+label-urgent-padding = 2
 
-# toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+[module/wireless-network]
+type = internal/network
+interface = wlo1
+interval = 3.0
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+format-connected = <ramp-signal> <label-connected>
+format-connected-foreground = #2f2f38
+format-connected-background = #81a2be
+format-connected-padding = 2
+label-connected = %essid%
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+format-disconnected =
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = #2f2f38
 
-# toggle sticky
-bindsym $mod+Shift+s sticky toggle
+[module/eth]
+type = internal/network
+interface = enp0s3
+interval = 3.0
 
-# focus the parent container
-bindsym $mod+a focus parent
+format-connected-padding = 2
+format-connected-foreground = #2f2f38
+format-connected-background = #81a2be
+format-connected-prefix = " "
+format-connected-prefix-foreground = #2f2f38
+label-connected = %local_ip%
 
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
+format-disconnected =
 
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
+[module/date]
+type = internal/date
+interval = 5
 
-# navigate workspaces next / previous
-bindsym $mod+Ctrl+Right workspace next
-bindsym $mod+Ctrl+Left workspace prev
+date =
+date-alt = " %Y-%m-%d"
 
-# workspaces
-set $ws1 1
-set $ws2 2
-set $ws3 3
-set $ws4 4
-set $ws5 5
-set $ws6 6
-set $ws7 7
-set $ws8 8
+time = %I:%M
+time-alt = %H:%M:%S
 
-# switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
+format-prefix = 
+format-foreground = #2f2f38
+format-background = #81a2be
+format-padding = 2
 
-# Move focused container to workspace
-bindsym $mod+Ctrl+1 move container to workspace $ws1
-bindsym $mod+Ctrl+2 move container to workspace $ws2
-bindsym $mod+Ctrl+3 move container to workspace $ws3
-bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace $ws5
-bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace $ws7
-bindsym $mod+Ctrl+8 move container to workspace $ws8
+label = %date% %time%
 
-# Move to workspace with focused container
-bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
+[module/battery]
+type = internal/battery
 
-# Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="Calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
-for_window [title="File Transfer*"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-gtk-greeter-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Thus"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
-for_window [class=".*"] border pixel 0
+; This is useful in case the battery never reports 100% charge
+full-at = 99
 
-# switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = ACAD
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+poll-interval = 5
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
+[module/powermenu]
+type = custom/menu
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+expand-right = true
 
-# Set shut down, restart and locking features
-bindsym $mod+0 mode "$mode_system"
-set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+format-spacing = 1
 
-    # exit system mode: "Enter" or "Escape"
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
+label-open = 
+label-open-foreground = #81a2be
+label-close =  cancel
+label-close-foreground = #81a2be
+label-separator = |
+label-separator-foreground = #81a2be
 
-# Resize window (you can also use the mouse for that)
-bindsym $mod+r mode "resize"
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 5 px or 5 ppt
-        bindsym k resize grow height 5 px or 5 ppt
-        bindsym l resize shrink height 5 px or 5 ppt
-        bindsym semicolon resize grow width 5 px or 5 ppt
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+menu-0-2 = log off
+menu-0-2-exec = menu-open-3
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = reboot
 
-        # exit resize mode: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+menu-2-0 = power off
+menu-2-0-exec = poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
 
-# Autostart applications
-exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-exec --no-startup-id nm-applet
-# exec --no-startup-id xfce4-power-manager
-exec --no-startup-id pamac-tray
-exec --no-startup-id clipit
-exec_always --no-startup-id ff-theme-util
-exec_always --no-startup-id fix_xcursor
-exec_always --no-startup-id $HOME/.config/polybar/i3wmthemer_bar_launch.sh
+menu-3-0 = log off
+menu-3-0-exec = i3 exit logout
+menu-3-1 = cancel
+menu-3-1-exec = menu-open-0
 
-# Theme colors
-client.focused #b0c4bb #2f2f38 #b0c4bb #81a2be #81a2be
-client.focused_inactive #b0c4bb #2f2f38 #b0c4bb #688486 #688486
-client.unfocused #b0c4bb #2f2f38 #b0c4bb #688486 #688486
-client.urgent #b0c4bb #2f2f38 #b0c4bb #688486 #688486
-client.placeholder #b0c4bb #2f2f38 #b0c4bb #688486 #688486
+[settings]
+screenchange-reload = true
 
-client.background #2f2f38
-
-# Gaps
-gaps inner 10
-gaps outer -4
-
-smart_gaps on
-
-# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
-
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
-
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
-
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
-
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-
-# set power-manager and volume control
-exec --no-startup-id mate-power-manager
-
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -c 0 -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -c 0 -q set Master 2db- unmute
-bindsym XF86AudioMute exec --no-startup-id amixer -q set Master toggle
-
-# touchpad on and off controller on laptop with Fn+<touchpad control functional key>
-bindsym XF86TouchpadOn exec --no-startup-id synclient Touchpadoff=0
-bindsym XF86TouchpadOff exec --no-startup-id synclient Touchpadoff=1
-
-# for transparency
-exec --no-startup-id picom
+[global/wm]
+margin-top = 0
+margin-bottom = 0
