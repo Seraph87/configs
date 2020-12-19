@@ -25,7 +25,7 @@
   # replicates the default behaviour.
   networking.useDHCP = false;
   networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.wlp0s20f0u2.useDHCP = true;
+  networking.interfaces.wlp0s20f0u2.useDHCP = false;
   networking.networkmanager.enable = true;
 
   # Configure network proxy if necessary
@@ -63,14 +63,21 @@
   services.xserver.libinput.enable = true;
 
   #Linux Kernel
-boot.kernelPackages = pkgs.linuxPackages_5_9;
+  boot.kernelPackages = pkgs.linuxPackages_5_9;
 
   # RTL8821ce Driver
-boot.extraModulePackages = [ config.boot.kernelPackages.rtl8821ce ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.rtl8821ce ];
+
+  # Fish shell
+  programs.fish.enable = true;
+
+  # Enable non-free software
+  nixpkgs.config.allowUnfree = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.grizzly = {
     isNormalUser = true;
+    shell = pkgs.fish;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
